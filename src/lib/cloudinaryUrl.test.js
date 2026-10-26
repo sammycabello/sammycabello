@@ -3,6 +3,7 @@ import {
   cldImage,
   cldVideo,
   cldVideoPoster,
+  cldVideoPreviewPoster,
   optimizeCloudinaryUrl,
 } from './cloudinaryUrl.js'
 
@@ -33,10 +34,18 @@ describe('cloudinaryUrl', () => {
     expect(optimizeCloudinaryUrl(FONT, 'icon')).toBe(FONT)
   })
 
-  it('adds video delivery transforms', () => {
+  it('adds video delivery transforms with width cap and stripped audio', () => {
     const out = cldVideo(VIDEO)
-    expect(out).toContain('q_auto/vc_auto/f_auto:video')
+    expect(out).toContain('c_limit,w_1280/ac_none/q_auto/vc_auto/f_auto:video')
     expect(out).toContain('v1779347245/lumenbn2_1_spiba3.mp4')
+  })
+
+  it('generates a lightweight first-frame poster for video URLs', () => {
+    const out = cldVideoPreviewPoster(cldVideo(VIDEO))
+    expect(out).toBe(
+      'https://res.cloudinary.com/dsy30p7gf/video/upload/so_0,c_limit,w_1280,q_auto,f_jpg/v1779347245/lumenbn2_1_spiba3.mp4',
+    )
+    expect(cldVideoPreviewPoster(PNG)).toBeUndefined()
   })
 
   it('extends video poster without replacing f_jpg', () => {

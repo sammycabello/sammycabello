@@ -1,43 +1,14 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { describe, expect, it, vi, afterEach } from 'vitest'
 import { Route } from 'react-router-dom'
-import { ProjectDetailView } from './ProjectDetailView.jsx'
+import { ProjectDetailView, buildProportionalGalleryRows } from './ProjectDetailView.jsx'
 import { renderWithRouter } from '../test/testUtils.jsx'
 
-vi.mock('lenis', () => {
-  class LenisMock {
-    constructor() {
-      this.scroll = 0
-      this.limit = 900
-      this.listeners = new Map()
-      this.raf = vi.fn()
-      this.resize = vi.fn()
-      this.destroy = vi.fn()
-    }
-
-    on(event, callback) {
-      if (!this.listeners.has(event)) this.listeners.set(event, [])
-      this.listeners.get(event).push(callback)
-      return () => this.off(event, callback)
-    }
-
-    off(event, callback) {
-      const list = this.listeners.get(event)
-      if (!list) return
-      this.listeners.set(
-        event,
-        list.filter((cb) => cb !== callback),
-      )
-    }
-
-    scrollTo(target, options = {}) {
-      this.scroll = target
-      this.listeners.get('scroll')?.forEach((cb) => cb(this))
-      options.onComplete?.()
-    }
-  }
-  return { default: LenisMock }
-})
+vi.mock('../lib/initLenis.js', () => ({
+  getLenis: () => ({
+    scrollTo: vi.fn(),
+  }),
+}))
 
 vi.mock('tech-stack-icons', () => ({
   default: ({ name }) => <span data-testid="stack-icon">{name}</span>,
@@ -55,47 +26,47 @@ describe('ProjectDetailView', () => {
     )
   }
 
-  it('renders spora project copy and stack icons', () => {
+  it('renders project title, client, description, stack icons, and fixed navbar', () => {
     renderProject('spora')
 
+    expect(screen.getByRole('heading', { level: 1, name: 'Spora' })).toBeInTheDocument()
+    expect(screen.getByText('End of Degree Project (TFG)')).toBeInTheDocument()
     expect(screen.getByText(/SPORA is a collaborative/i)).toBeInTheDocument()
     expect(screen.getAllByTestId('stack-icon').length).toBeGreaterThan(0)
-    expect(document.querySelector('a[href="/"]')).toBeTruthy()
+    expect(screen.getByLabelText('Volver al inicio')).toBeInTheDocument()
   })
 
-  it('cycles paragraphs via dots and wheel', () => {
+  it('renders similar projects in the More work section', () => {
     renderProject('spora')
 
-    const dots = screen.getAllByRole('tab', { name: /Ir al párrafo/i })
-    fireEvent.click(dots[1])
-
-    const textBlock = document.querySelector('[data-lenis-prevent="true"]')
-    fireEvent.wheel(textBlock, { deltaY: 100 })
-    fireEvent.wheel(textBlock, { deltaY: -100 })
-    fireEvent.wheel(textBlock, { deltaX: 50 })
-
+    expect(screen.getByRole('heading', { level: 2, name: /More work/i })).toBeInTheDocument()
+    const similarSection = screen.getByLabelText('Más trabajos similares')
+    const links = similarSection.querySelectorAll('a[href^="/project/"]')
+    expect(links).toHaveLength(2)
   })
 
   it('falls back to first project for unknown slug', () => {
     renderProject('unknown-slug')
+    expect(screen.getByRole('heading', { level: 1, name: 'Spora' })).toBeInTheDocument()
     expect(screen.getByText(/SPORA is a collaborative/i)).toBeInTheDocument()
   })
 
-  it('opens and closes lightbox', async () => {
+  it('opens and closes lightbox when clicking a gallery item', async () => {
     renderProject('spora')
 
-    const tile = document.querySelector('section button[type="button"]')
-    if (tile) fireEvent.click(tile)
+    const tile = screen.getByLabelText('Ampliar medio 1 de Spora')
+    fireEvent.click(tile)
 
     await waitFor(() => {
-      const closeBtn = screen.queryByRole('button', { name: 'Cerrar' })
-      if (closeBtn) fireEvent.click(closeBtn)
+      const closeBtn = screen.queryByRole('button', { name: 'Cerrar vista ampliada' })
+      expect(closeBtn).toBeInTheDocument()
+      fireEvent.click(closeBtn)
     })
 
     fireEvent.keyDown(window, { key: 'Escape' })
   })
 
-  it('renders figma live link for xplorer', () => {
+  it('renders figma live link for xplorer and omits github link when absent', () => {
     renderProject('xplorer')
     expect(
       screen.getByLabelText('Ver demo en vivo (se abre en una nueva pestaña)'),
@@ -103,5 +74,19 @@ describe('ProjectDetailView', () => {
     expect(
       screen.queryByLabelText('Ver repositorio en GitHub (se abre en una nueva pestaña)'),
     ).not.toBeInTheDocument()
+  })
+
+  it('builds proportional gallery rows for mobile, tablet, and desktop viewports', () => {
+    const media = ['a.png', 'b.png', 'c.png', 'd.png', 'e.png', 'f.png']
+    const ratios = { 0: 1.77, 1: 1.0, 2: 1.77, 3: 0.75, 4: 0.75, 5: 1.33 }
+
+    const mobileRows = buildProportionalGalleryRows(media, ratios, 390)
+    expect(mobileRows.map((r) => r.length)).toEqual([1, 1, 1, 2, 1])
+
+    const tabletRows = buildProportionalGalleryRows(media, ratios, 768)
+    expect(tabletRows.map((r) => r.length)).toEqual([2, 1, 2, 1])
+
+    const desktopRows = buildProportionalGalleryRows(media, ratios, 1440)
+    expect(desktopRows.map((r) => r.length)).toEqual([2, 1, 3])
   })
 })

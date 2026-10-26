@@ -3,6 +3,8 @@ import { cldImage, cldVideo } from '../lib/cloudinaryUrl.js'
 const HOME_GALLERY_ITEMS_RAW = [
   {
     slug: 'spora',
+    client: 'End of Degree Project (TFG)',
+    tagline: 'Collaborative generative art platform',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1778926540/cover_yginat.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -26,11 +28,13 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1778927502/Captura_de_pantalla_2026-05-16_123129_cd2qxf.png"
     ],
     liveUrl: "https://spora.sammycabello.com",
-    githubUrl: "https://github.com/sammytsukino/spora-client",
+    githubUrl: "https://github.com/sammycabello/spora-client",
     stack: ["react", "typescript", "vitejs", "tailwindcss", "nodejs", "expressjs", "mongodb", "jest", "p5js", "threejs", "gsap", "adobeillustrator", "cloudinary"]
   },
   {
     slug: 'choreomania',
+    client: 'Academic Group Project',
+    tagline: 'Retro-futuristic interactive web narrative',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779013786/cover_qblyp3.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -48,21 +52,17 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779266473/Captura_de_pantalla_2026-05-20_100507_n5v1nw.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779266480/Captura_de_pantalla_2026-05-20_100339_rejxmd.png",
       "https://res.cloudinary.com/dsy30p7gf/video/upload/v1779269974/CHOREOMANIA__The_last_ascent_-_Google_Chrome_2026-05-20_10-00-30_ao4hih.mov",
-
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779266477/Captura_de_pantalla_2026-05-20_100402_xt117c.png",
       "https://res.cloudinary.com/dsy30p7gf/video/upload/v1779269973/CHOREOMANIA__The_last_ascent_-_Google_Chrome_2026-05-20_10-01-18_mppggf.mov",
-
     ],
     liveUrl: "https://choreomania.vercel.app/main/welcome.html",
-    githubUrl: "https://github.com/sammytsukino/Choreomania",
+    githubUrl: "https://github.com/sammycabello/Choreomania",
     stack: ["html5", "css3", "js", "jest", "figma", "vercel"]
   },
-
-
-
-
   {
     slug: 'sasscii',
+    client: 'Creative Coding Lab',
+    tagline: 'Real-time 3D & media to ASCII art converter',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779013884/cover_tsv99j.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -84,14 +84,13 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/video/upload/v1779270018/SAS-SCII_-_Google_Chrome_2026-05-20_10-47-18_qmikwn.mov",
     ],
     liveUrl: "https://sas-scii.vercel.app/",
-    githubUrl: "https://github.com/sammytsukino/SAS-SCII",
+    githubUrl: "https://github.com/sammycabello/SAS-SCII",
     stack: ["react", "threejs", "vitejs"]
   },
-
-
-
   {
     slug: 'puelladatabase',
+    client: 'Backend & Web Development',
+    tagline: 'Full-featured CRUD & REST API archive',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779014473/cover_eq1xua.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -112,18 +111,14 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779014880/Captura_de_pantalla_2026-05-17_124422_pfymbx.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779014880/Captura_de_pantalla_2026-05-17_124410_fvtpxx.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779263278/Captura_de_pantalla_2026-05-20_094734_w1mdpl.png"
-
     ],
-    githubUrl: "https://github.com/sammytsukino/madoka-app-django",
+    githubUrl: "https://github.com/sammycabello/madoka-app-django",
     stack: ["django", "python", "sqlite"]
   },
-
-
-
-
-
   {
     slug: 'crap-book',
+    client: 'Personal Experiment',
+    tagline: 'Scrapbook-style goal tracker with a twist',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779015131/cover_o7tnbi.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -143,16 +138,15 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267427/Captura_de_pantalla_2026-05-20_105527_kc2ail.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267430/Captura_de_pantalla_2026-05-20_105549_gr2g3m.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267500/Captura_de_pantalla_2026-05-20_105815_gzb5iw.png"
-
     ],
     liveUrl: "https://crap-book.vercel.app/",
-    githubUrl: "https://github.com/sammytsukino/CRAP-BOOK",
+    githubUrl: "https://github.com/sammycabello/CRAP-BOOK",
     stack: ["html5", "css3", "js"]
   },
-
-
   {
     slug: 'mtholly',
+    client: 'Interactive Puzzle Game',
+    tagline: 'Blueprint-inspired terminal adventure',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779015593/cover_deywz4.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -167,7 +161,6 @@ const HOME_GALLERY_ITEMS_RAW = [
       "The experience is presented through a custom UI that mixes a blueprint aesthetic with a retro terminal interface. It includes a home screen, an interactive game view, status feedback, and accessibility-focused structure for keyboard and screen reader support."
     ],
     gallery: [
-      
       "https://res.cloudinary.com/dsy30p7gf/video/upload/v1779270598/The_Mount_Holly_Estate_-_A_Blueprint_Adventure_-_Google_Chrome_2026-05-20_11-02-00_ogs5bs.mov",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267762/Captura_de_pantalla_2026-05-20_105925_prjwbq.png",
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267797/Captura_de_pantalla_2026-05-20_105947_xuh1oy.png",
@@ -175,14 +168,13 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779267804/Captura_de_pantalla_2026-05-20_110029_fsmlck.png",
     ],
     liveUrl: "https://the-mount-holly-estate.vercel.app/",
-    githubUrl: "https://github.com/sammytsukino/the-mount-holly-estate",
+    githubUrl: "https://github.com/sammycabello/the-mount-holly-estate",
     stack: ["react", "vitejs", "tailwindcss", "postcss"]
   },
-
-
-
   {
     slug: 'charisma',
+    client: 'Personal Project',
+    tagline: 'Brutalist ASCII and pixel art studio',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779015974/cover_cfwcl7.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -202,13 +194,13 @@ const HOME_GALLERY_ITEMS_RAW = [
       "https://res.cloudinary.com/dsy30p7gf/image/upload/v1779270339/Captura_de_pantalla_2026-05-20_114534_hqerfv.png",
     ],
     liveUrl: "https://char-isma.vercel.app/",
-    githubUrl: "https://github.com/sammytsukino/char-isma",
+    githubUrl: "https://github.com/sammycabello/char-isma",
     stack: ["html5", "css3", "js"]
   },
-
-
   {
     slug: 'xplorer',
+    client: 'UI/UX & Branding Case Study',
+    tagline: 'Interdimensional travel agency experience',
     src: 'https://res.cloudinary.com/dsy30p7gf/image/upload/v1779016142/img-6_mbjqnu.png',
     pal: [
       [0.9411764705882353, 0.9411764705882353, 0.9411764705882353],
@@ -232,8 +224,6 @@ const HOME_GALLERY_ITEMS_RAW = [
     liveUrl: "https://www.figma.com/proto/TAP0cyNz8kO9AsdBAqP77K/XPLORER-Entrega-final?node-id=1-2&p=f&t=IkngQ3nsHx7qs1bk-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A52961",
     stack: ["figma", "adobeillustrator", "adobeaftereffects"]
   },
-
-
 ]
 
 function optimizeGalleryMediaUrl(url) {
@@ -242,6 +232,7 @@ function optimizeGalleryMediaUrl(url) {
 
 export const HOME_GALLERY_ITEMS = HOME_GALLERY_ITEMS_RAW.map((item) => ({
   ...item,
+  description: item.description ?? item.paragraphs?.[0] ?? '',
   src: cldImage(item.src, 'galleryCover'),
   gallery: item.gallery.map(optimizeGalleryMediaUrl),
 }))
@@ -254,5 +245,3 @@ export function paletteToRgbCss(pal) {
     return `rgb(${R} ${G} ${B})`
   })
 }
-
-

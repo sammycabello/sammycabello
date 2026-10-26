@@ -4,7 +4,6 @@ export const UI_SOUND_SRC = {
   chomp: '/sounds/chomp.mp3',
 }
 
-/** @type {Map<string, HTMLAudioElement>} */
 const audioBySrc = new Map()
 
 export function playUiSound(src) {
@@ -20,7 +19,7 @@ export function playUiSound(src) {
     audio.currentTime = 0
     void audio.play().catch(() => {})
   } catch {
-    // Autoplay or missing asset — navigation still works.
+    return
   }
 }
 
@@ -36,7 +35,6 @@ export function playChompSound() {
   playUiSound(UI_SOUND_SRC.chomp)
 }
 
-/** @internal Test-only reset of cached audio elements. */
 export function resetUiSoundsForTests() {
   audioBySrc.clear()
 }
